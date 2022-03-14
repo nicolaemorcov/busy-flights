@@ -24,7 +24,6 @@ public class BusyFlightsController {
         BusyFlightsProcessor = busyFlightsProcessor;
     }
 
-    //TODO validate the rest of params, see if with annotations this can be achieved
     @GetMapping("/search-flights")
     public ResponseEntity<?> searchFlights(String origin, String destination,
                                            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate,
@@ -33,7 +32,7 @@ public class BusyFlightsController {
         BusyFlightsRequest busyFlightsRequest = new BusyFlightsRequest(origin, destination, departureDate.toString(),
                 returnDate.toString(), numberOfPassengers);
         List<BusyFlightsResponse> busyFlightsResponses = BusyFlightsProcessor.searchFlights(busyFlightsRequest);
-        if (!busyFlightsResponses.isEmpty()){
+        if (busyFlightsResponses.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("NO flights found with the params");
         }else {
             return ResponseEntity.status(HttpStatus.OK).body(busyFlightsResponses);

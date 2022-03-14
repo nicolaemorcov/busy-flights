@@ -1,14 +1,19 @@
 package com.travix.medusa.busyflights.domain.components;
 
-import com.travix.medusa.busyflights.domain.FlightSupplier;
 import com.travix.medusa.busyflights.domain.*;
+import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
+import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
+import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Component
 public class BusyFlightsProcessorImpl implements BusyFlightsProcessor {
@@ -30,24 +35,41 @@ public class BusyFlightsProcessorImpl implements BusyFlightsProcessor {
         for (FlightSupplier flightSupplier : FlightSupplier.values()) {
             BaseRequest baseRequest = RequestBuilder.convert(busyFlightsRequest, flightSupplier);
             try {
-                List<BaseResponse> responseFlights = getFlightResponse(baseRequest, flightSupplier.getUrl());
+                List<BaseResponse> responseFlights = getFlightResponse(baseRequest, flightSupplier.getUrl(), flightSupplier);
                 baseResponses.addAll(responseFlights);
             }catch (Exception e){
-                logger.error("Failed to get the Response from {}", flightSupplier.name());
+                logger.error("Failed to get the Response from {} :: exception={}", flightSupplier.name(), e);
             }
         }
         return responseHandler.filterFlights(baseResponses);
     }
 
-
-
-    private List<BaseResponse> getFlightResponse(BaseRequest baseRequest, String url){
-        ResponseEntity<BaseResponse[]> responseEntity =
-                restTemplate.postForEntity(url, baseRequest, BaseResponse[].class);
-        if (responseEntity.getBody() != null){
-            return Arrays.asList(responseEntity.getBody());
+    private List<BaseResponse> getFlightResponse(BaseRequest baseRequest, String url, FlightSupplier flightSupplier){
+        switch (flightSupplier){
+            case CRAZY_AIR: {
+                ResponseEntity<CrazyAirResponse[]> crazyResponse = restTemplate.postForEntity( url, (CrazyAirRequest)baseRequest , CrazyAirResponse[].class );
+                if (crazyResponse.getBody() != null){
+                    return Arrays.asList(crazyResponse.getBody());
+                }
+            }
+            case TOUGH_JET: {
+                ResponseEntity<ToughJetResponse[]> toughJetResponse = restTemplate.postForEntity( url, baseRequest , ToughJetResponse[].class );
+                if (toughJetResponse.getBody() != null){
+                    return Arrays.asList(toughJetResponse.getBody());
+                }
+            }
         }
         return Collections.emptyList();
     }
+
+
+    //TODO Need more time to play with spring annotations in order to use this. As an abstract class cannot be sent unless given more info on child classes
+//    private List<BaseResponse> getFlightResponse(BaseRequest baseRequest, String url) throws JsonProcessingException {
+//        ResponseEntity<BaseResponse[]> response = restTemplate.postForEntity( url, baseRequest , BaseResponse[].class );
+//        if (response.getBody() != null){
+//            return Arrays.asList(response.getBody());
+//        }
+//        return Collections.emptyList();
+//    }
 
 }

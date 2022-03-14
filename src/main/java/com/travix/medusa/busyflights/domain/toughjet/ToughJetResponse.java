@@ -25,6 +25,9 @@ public class ToughJetResponse extends BaseResponse {
         this.inboundDateTime = inboundDateTime;
     }
 
+    public ToughJetResponse() {
+    }
+
     public String getCarrier() {
         return carrier;
     }

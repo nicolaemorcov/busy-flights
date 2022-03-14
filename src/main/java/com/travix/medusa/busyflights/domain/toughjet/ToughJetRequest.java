@@ -1,16 +1,19 @@
 package com.travix.medusa.busyflights.domain.toughjet;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.travix.medusa.busyflights.domain.BaseRequest;
 
-public class ToughJetRequest extends BaseRequest {
+import java.io.Serializable;
+
+public class ToughJetRequest extends BaseRequest implements Serializable {
 
     private String from;
     private String to;
     private String outboundDate;
     private String inboundDate;
-    private int numberOfAdults;
+    private Integer numberOfAdults;
 
-    public ToughJetRequest(String from, String to, String outboundDate, String inboundDate, int numberOfAdults) {
+    public ToughJetRequest(String from, String to, String outboundDate, String inboundDate, Integer numberOfAdults) {
         this.from = from;
         this.to = to;
         this.outboundDate = outboundDate;
@@ -50,7 +53,7 @@ public class ToughJetRequest extends BaseRequest {
         this.inboundDate = inboundDate;
     }
 
-    public int getNumberOfAdults() {
+    public Integer getNumberOfAdults() {
         return numberOfAdults;
     }
 

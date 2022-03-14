@@ -1,11 +1,11 @@
 package com.travix.medusa.busyflights.domain.crazyair;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.travix.medusa.busyflights.domain.BaseResponse;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
-public class CrazyAirResponse extends BaseResponse {
+public class CrazyAirResponse extends BaseResponse implements Serializable {
 
     private String airline;
     private double price;
@@ -15,8 +15,9 @@ public class CrazyAirResponse extends BaseResponse {
     private String departureDate;
     private String arrivalDate;
 
-    public CrazyAirResponse(String airline, double price, String cabinclass, String departureAirportCode,
-                            String destinationAirportCode, String departureDate, String arrivalDate) {
+    public CrazyAirResponse(@JsonProperty String airline, @JsonProperty double price, @JsonProperty String cabinclass,
+                            @JsonProperty String departureAirportCode,
+                            @JsonProperty String destinationAirportCode, @JsonProperty String departureDate, @JsonProperty String arrivalDate) {
         this.airline = airline;
         this.price = price;
         this.cabinclass = cabinclass;
@@ -24,6 +25,9 @@ public class CrazyAirResponse extends BaseResponse {
         this.destinationAirportCode = destinationAirportCode;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
+    }
+
+    public CrazyAirResponse() {
     }
 
     public String getAirline() {
@@ -70,11 +74,11 @@ public class CrazyAirResponse extends BaseResponse {
         return departureDate;
     }
 
-    public LocalDateTime getDepartureLocalDateTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(departureDate, formatter);
-
-    }
+//    public LocalDateTime getDepartureLocalDateTime() {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss.SSS");
+//        return LocalDateTime.parse(departureDate, formatter);
+//
+//    }
 
     public void setDepartureDate(final String departureDate) {
         this.departureDate = departureDate;

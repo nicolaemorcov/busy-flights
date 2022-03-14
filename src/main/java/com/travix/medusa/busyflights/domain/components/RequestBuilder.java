@@ -9,12 +9,12 @@ import com.travix.medusa.busyflights.domain.toughjet.ToughJetRequest;
 public final class RequestBuilder {
 
     public static BaseRequest convert(BusyFlightsRequest busyFlightsRequest, FlightSupplier flightSupplier){
-        if (flightSupplier.equals(FlightSupplier.CRAZY_AIR)){
-            return new CrazyAirRequest(busyFlightsRequest.getOrigin(), busyFlightsRequest.getDestination(),
+        switch (flightSupplier) {
+            case CRAZY_AIR: return new CrazyAirRequest(busyFlightsRequest.getOrigin(), busyFlightsRequest.getDestination(),
                     busyFlightsRequest.getDepartureDate(), busyFlightsRequest.getReturnDate(), busyFlightsRequest.getNumberOfPassengers());
-        }else {
-            return new ToughJetRequest(busyFlightsRequest.getOrigin(), busyFlightsRequest.getDestination(),
+            case TOUGH_JET:     return new ToughJetRequest(busyFlightsRequest.getOrigin(), busyFlightsRequest.getDestination(),
                     busyFlightsRequest.getDepartureDate(), busyFlightsRequest.getReturnDate(), busyFlightsRequest.getNumberOfPassengers());
+            default:    return null;
         }
     }
 
