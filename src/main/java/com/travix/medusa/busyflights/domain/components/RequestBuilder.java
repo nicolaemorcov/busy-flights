@@ -1,5 +1,8 @@
-package com.travix.medusa.busyflights.domain;
+package com.travix.medusa.busyflights.domain.components;
 
+import com.travix.medusa.busyflights.domain.BaseRequest;
+import com.travix.medusa.busyflights.domain.BusyFlightsRequest;
+import com.travix.medusa.busyflights.domain.FlightSupplier;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetRequest;
 

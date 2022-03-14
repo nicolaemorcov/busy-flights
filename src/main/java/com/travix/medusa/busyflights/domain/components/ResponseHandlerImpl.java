@@ -1,5 +1,8 @@
-package com.travix.medusa.busyflights.domain;
+package com.travix.medusa.busyflights.domain.components;
 
+import com.travix.medusa.busyflights.domain.BaseResponse;
+import com.travix.medusa.busyflights.domain.BusyFlightsResponse;
+import com.travix.medusa.busyflights.domain.FlightSupplier;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
 import org.springframework.stereotype.Component;
