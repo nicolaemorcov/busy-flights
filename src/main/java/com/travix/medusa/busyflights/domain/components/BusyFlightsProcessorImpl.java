@@ -44,6 +44,9 @@ public class BusyFlightsProcessorImpl implements BusyFlightsProcessor {
         return responseHandler.filterFlights(baseResponses);
     }
 
+    //TODO this method is not a good implementation, I would replace it with the commented method.
+    //TODO I was planning to use the commented method below in a loop for each flight supplier
+    //TODO but needed more time to play around with annotations as abstract class needs more details on their child classes
     private List<BaseResponse> getFlightResponse(BaseRequest baseRequest, String url, FlightSupplier flightSupplier){
         switch (flightSupplier){
             case CRAZY_AIR: {
