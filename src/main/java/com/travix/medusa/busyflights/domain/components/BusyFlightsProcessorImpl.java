@@ -47,7 +47,7 @@ public class BusyFlightsProcessorImpl implements BusyFlightsProcessor {
     private List<BaseResponse> getFlightResponse(BaseRequest baseRequest, String url, FlightSupplier flightSupplier){
         switch (flightSupplier){
             case CRAZY_AIR: {
-                ResponseEntity<CrazyAirResponse[]> crazyResponse = restTemplate.postForEntity( url, (CrazyAirRequest)baseRequest , CrazyAirResponse[].class );
+                ResponseEntity<CrazyAirResponse[]> crazyResponse = restTemplate.postForEntity( url, baseRequest , CrazyAirResponse[].class );
                 if (crazyResponse.getBody() != null){
                     return Arrays.asList(crazyResponse.getBody());
                 }
@@ -71,5 +71,6 @@ public class BusyFlightsProcessorImpl implements BusyFlightsProcessor {
 //        }
 //        return Collections.emptyList();
 //    }
+
 
 }

@@ -22,6 +22,9 @@ public class CrazyAirRequest extends BaseRequest implements Serializable {
         this.passengerCount = passengerCount;
     }
 
+    public CrazyAirRequest() {
+    }
+
     public String getOrigin() {
         return origin;
     }

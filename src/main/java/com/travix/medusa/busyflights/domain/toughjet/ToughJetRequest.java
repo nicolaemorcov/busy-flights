@@ -21,6 +21,9 @@ public class ToughJetRequest extends BaseRequest implements Serializable {
         this.numberOfAdults = numberOfAdults;
     }
 
+    public ToughJetRequest() {
+    }
+
     public String getFrom() {
         return from;
     }

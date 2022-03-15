@@ -3,6 +3,7 @@ package com.travix.medusa.busyflights.domain.toughjet;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class ToughJetController {
 
     //TODO validate the rest of params, see if with annotations this can be achieved
     @PostMapping("/search-tough-jet-flights")
-    public ResponseEntity<?> searchToughJetFlights(ToughJetRequest toughJetRequest){
+    public ResponseEntity<?> searchToughJetFlights(@RequestBody ToughJetRequest toughJetRequest){
         List<ToughJetResponse> toughJetResponses = getToughJetResponses(toughJetRequest);
         if (toughJetResponses.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("NO flights found with the params");
