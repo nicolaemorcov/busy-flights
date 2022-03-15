@@ -1,3 +1,11 @@
+
+
+You can start with looking at BusyFlightsController, that is where it all starts. 
+I created controllers for CrazyAir and ToughJet to receive requests so that I would create a close to the expected application. The 2 third parties controllers simply return back responses, without connecting to db, as that is not required for this test 
+
+
+
+
 **Travix - Problem to be solved**
 
 **Background:**
