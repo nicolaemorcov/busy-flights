@@ -1,7 +1,6 @@
 package com.travix.medusa.busyflights.domain.components;
 
 import com.travix.medusa.busyflights.domain.*;
-import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
 import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
 import org.slf4j.Logger;

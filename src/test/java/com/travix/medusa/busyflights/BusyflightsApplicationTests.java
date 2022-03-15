@@ -32,6 +32,8 @@ class BusyflightsApplicationTests {
         this.busyFlightsProcessor = new BusyFlightsProcessorImpl(new ResponseHandlerImpl());
     }
 
+    //TODO here could be more tests, but needed more time on this, to think of all possible cases
+
     @Test
     void testResponseFlightsFound() {
         BusyFlightsRequest busyFlightsRequest = buildRequest();
